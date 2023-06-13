@@ -1,24 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import './Home.css'
 
-function Home() {
+const Home = () => {
   return (
     <div>
-      <h1>Seja bem-vindo ao nosso site de reciclagem!</h1>
-      <p>Por favor, escolha uma opção abaixo para se cadastrar:</p>
+      <h1>Bem-vindo ao nosso site!</h1>
+      <p>Aqui está como funciona o site:</p>
       <ul>
-        <li>
-          <Link to="/compradores">Sou um comprador</Link>
-        </li>
-        <li>
-          <Link to="/catadores">Sou um catador</Link>
-        </li>
-        <li>
-          <Link to="/fornecedores">Sou um fornecedor</Link>
-        </li>
+        <li>Explicação 1</li>
+        <li>Explicação 2</li>
+        <li>Explicação 3</li>
+        {/* Adicione quantas explicações você precisar */}
       </ul>
     </div>
   );
-}
+};
 
 export default Home;

@@ -1,27 +1,32 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import About from './pages/About';
-import Support from './pages/Support';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import './App.css';
+import Catador from './pages/Catador';
+import Fornecedor from './pages/Fornecedor';
+import Comprador from './pages/Comprador';
+import Navegacao from './Navegacao';
+import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
+import './Style.css';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">
-        <Header />
-        <main>
-          <Routes>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/support" element={<Support />}></Route>
-          <Route path="/" element={<Home />}></Route>
-          </Routes>
-        </main>
-        <Footer />
+        <Navegacao />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catador" element={<Catador />} />
+          <Route path="/fornecedor" element={<Fornecedor />} />
+          <Route path="/comprador" element={<Comprador />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+        </Routes>
       </div>
     </Router>
   );
-}
+};
 
 export default App;
+
