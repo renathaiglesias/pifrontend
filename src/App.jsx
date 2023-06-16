@@ -7,7 +7,9 @@ import Comprador from './pages/Comprador';
 import Navegacao from './Navegacao';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
+import Footer from './Footer';
 import './Style.css';
+import 'react-bootstrap-icons'
 
 const App = () => {
   return (
@@ -23,8 +25,11 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
         </Routes>
+        <Footer />
       </div>
+
     </Router>
+
   );
 };
 

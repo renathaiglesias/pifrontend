@@ -5,6 +5,23 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  .login-button {
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #1361a5;
+  }
+  
+  .logo:hover {
+    filter: brightness(150%); /* Ajuste o valor conforme necessário para obter o efeito desejado */
+  }
+  
+  
+  .custom-navbar {
+    background-color: #275a53; /* Substitua pela cor desejada */
+  }
   
   h1 {
     color: #333;

@@ -1,42 +1,107 @@
 /* Home.css */
+.body {
+  color: aqua;
+}
+
+.custom-caption {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: left;
+  color: #ffffff;
+  /* Cor branca */
+  z-index: 2;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Cor de fundo semi-transparente */
+}
+
+
+.custom-overlay {
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Cor de fundo semi-transparente */
+}
+
+
+
+
+
+
+.muted-red {
+  color: #343637;
+}
+
+.muted-red:hover {
+  color: red;
+  /* Defina a cor desejada */
+}
+
+.muted-green {
+  color: #343637;
+}
+
+.muted-green:hover {
+  color: green;
+  /* Defina a cor desejada */
+}
+
+.muted-blue {
+  color: #343637;
+}
+
+.muted-blue:hover {
+  color: blue;
+  /* Defina a cor desejada */
+}
+
+.custom-image {
+  width: 800px;
+  height: 400px;
+}
 
 .home-container {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  h1 {
-    color: blue;
-    font-size: 24px;
-  }
-  
-  p {
-    color: red;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
-  
-  /* Estilize as explicações com cores diferentes */
-  li:nth-child(1) {
-    color: blue;
-  }
-  
-  li:nth-child(2) {
-    color: red;
-  }
-  
-  li:nth-child(3) {
-    color: green;
-  }
-  
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  color: blue;
+  font-size: 24px;
+}
+
+p {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* Estilize as explicações com cores diferentes */
+li:nth-child(1) {
+  color: blue;
+}
+
+li:nth-child(2) {
+  color: red;
+}
+
+li:nth-child(3) {
+  color: green;
+}

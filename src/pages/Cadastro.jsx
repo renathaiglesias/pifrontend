@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Cadastro.css';
 
+
 const Cadastro = () => {
   const [tipoCadastro, setTipoCadastro] = useState('');
   const [nome, setNome] = useState('');
