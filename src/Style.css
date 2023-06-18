@@ -60,3 +60,7 @@ body {
     color: #007bff;
   }
   
+  .navbar {
+    margin-bottom: 20px; /* Adicione o valor de margem desejado */
+  }
+  

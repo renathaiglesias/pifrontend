@@ -8,8 +8,11 @@ import Navegacao from './Navegacao';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Footer from './Footer';
+import EsqueciMinhaSenha from './pages/EsqueciSenha';
+
 import './Style.css';
-import 'react-bootstrap-icons'
+import 'react-bootstrap-icons';
+
 
 const App = () => {
   return (
@@ -24,14 +27,14 @@ const App = () => {
           <Route path="/comprador" element={<Comprador />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/esqueci" element={<EsqueciMinhaSenha />} />
         </Routes>
         <Footer />
       </div>
-
     </Router>
-
   );
 };
 
-export default App;
 
+
+export default App;

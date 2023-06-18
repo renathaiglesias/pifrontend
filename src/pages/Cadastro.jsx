@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Cadastro.css';
 
-
 const Cadastro = () => {
   const [tipoCadastro, setTipoCadastro] = useState('');
   const [nome, setNome] = useState('');
@@ -24,7 +23,7 @@ const Cadastro = () => {
     };
 
     console.log('Dados de cadastro:', dadosCadastro);
-    
+
     // Aqui você pode fazer uma requisição ao servidor ou salvar os dados localmente
 
     // Limpar os campos após o cadastro
@@ -35,27 +34,65 @@ const Cadastro = () => {
   };
 
   return (
+    
     <div className="cadastro-container">
       <h2>Cadastro</h2>
       <form onSubmit={handleCadastro}>
-        <label htmlFor="tipo">Escolha o tipo de cadastro:</label>
-        <select id="tipo" onChange={handleTipoCadastro} value={tipoCadastro} required>
-          <option value="">Selecione</option>
-          <option value="fornecedor">Fornecedor</option>
-          <option value="comprador">Comprador</option>
-          <option value="catador">Catador</option>
-        </select>
+        <div className="form-group">
+          <label htmlFor="tipo">Escolha o tipo de cadastro:</label>
+          <select
+            id="tipo"
+            className="form-control"
+            onChange={handleTipoCadastro}
+            value={tipoCadastro}
+            required
+          >
+            <option value="">Selecione</option>
+            <option value="fornecedor">Fornecedor</option>
+            <option value="comprador">Comprador</option>
+            <option value="catador">Catador</option>
+          </select>
+        </div>
 
-        <label htmlFor="nome">Nome:</label>
-        <input type="text" id="nome" value={nome} onChange={(event) => setNome(event.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            className="form-control"
+            value={nome}
+            onChange={(event) => setNome(event.target.value)}
+            required
+          />
+        </div>
 
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            className="form-control"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </div>
 
-        <label htmlFor="senha">Senha:</label>
-        <input type="password" id="senha" value={senha} onChange={(event) => setSenha(event.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="senha">Senha:</label>
+          <input
+            type="password"
+            id="senha"
+            className="form-control"
+            value={senha}
+            onChange={(event) => setSenha(event.target.value)}
+            required
+          />
+        </div>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit" className="btn btn-primary">
+          Cadastrar
+        </button>
       </form>
     </div>
   );
