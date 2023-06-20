@@ -1,17 +1,22 @@
 .esqueci-senha-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-  }
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  width: 400px;
+  padding: 40px;
+}
+  
+.esquecisenha-page {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
   .esqueci-senha-title {
-    font-size: 30px;
-  margin-bottom: 20px;
+    margin-bottom: 30px;
+  font-size: 30px;
+  color: #fff;
   text-align: center;
-  font-weight: bold;
   }
   
   .esqueci-senha-form {
@@ -20,15 +25,21 @@
   }
   
   .esqueci-senha-label {
-    font-weight: bold;
-    margin-bottom: 5px;
+    display: block;
+  margin-bottom: 5px;
+  color: #fff;
   }
   
   .esqueci-senha-input {
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;
+    padding: 10px 0;
+    outline: none;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 30px;
   }
   
   .esqueci-senha-button {

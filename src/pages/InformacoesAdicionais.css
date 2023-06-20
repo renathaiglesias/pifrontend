@@ -1,36 +1,36 @@
-.login-page {
-
+/* InformacoesAdicionais.css */
+.informacoes-adicionais-page {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-container {
+.informacoes-adicionais-container {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   width: 400px;
   padding: 40px;
 }
 
-.login-title {
+.informacoes-adicionais-title {
   margin-bottom: 30px;
   font-size: 30px;
   color: #fff;
   text-align: center;
 }
 
-.login-form {
+.informacoes-adicionais-form {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
 }
 
-.login-label {
+.informacoes-adicionais-label {
   display: block;
   margin-bottom: 5px;
   color: #fff;
 }
 
-.login-input {
+.informacoes-adicionais-input {
   width: 100%;
   padding: 10px 0;
   outline: none;
@@ -42,7 +42,25 @@
   margin-bottom: 30px;
 }
 
-.login-button {
+.informacoes-adicionais-select {
+  width: 100%;
+  padding: 10px 0;
+  outline: none;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.informacoes-adicionais-option {
+  background: transparent;
+  background-color: #275a53;
+  border: transparent;
+}
+
+.informacoes-adicionais-button {
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -51,28 +69,6 @@
   cursor: pointer;
 }
 
-.login-button:hover {
+.informacoes-adicionais-button:hover {
   background-color: #0056b3;
-}
-
-.login-links {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.login-link {
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.login-link:hover {
-  text-decoration: underline;
-}
-
-.login-link-separator {
-  margin: 0 8px;
-  color: rgb(255, 255, 255);
 }

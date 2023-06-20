@@ -19,6 +19,7 @@ const EsqueciMinhaSenha = () => {
     };
 
     return (
+        <div className='esquecisenha-page'>
         <div className="esqueci-senha-container">
             <h2 className="esqueci-senha-title">Redefinir Senha</h2>
             <form className="esqueci-senha-form" onSubmit={handleSubmit}>
@@ -48,7 +49,7 @@ const EsqueciMinhaSenha = () => {
                     Redefinir
                 </button>
             </form>
-        </div>
+        </div></div>
     );
 };
 

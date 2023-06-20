@@ -1,99 +1,81 @@
-import React, { useState } from 'react';
-import './Cadastro.css';
+import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { useNavigate } from "react-router-dom";
+import { firebaseConfig } from "../firebaseConfig";
+import "../pages/Cadastro.css";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 
 const Cadastro = () => {
-  const [tipoCadastro, setTipoCadastro] = useState('');
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const navigate = useNavigate(); // Obter a função navigate
 
-  const handleTipoCadastro = (event) => {
-    setTipoCadastro(event.target.value);
-  };
-
-  const handleCadastro = (event) => {
+  const handleCadastro = async (event) => {
     event.preventDefault();
 
-    // Executar a lógica de cadastro com os dados fornecidos pelo usuário
-    const dadosCadastro = {
-      tipo: tipoCadastro,
-      nome,
-      email,
-      senha
-    };
+    try {
+      // Criação do usuário com email e senha
+      const { user } = await createUserWithEmailAndPassword(auth, email, senha);
 
-    console.log('Dados de cadastro:', dadosCadastro);
+      // Salvar os dados de cadastro no Firestore
+      await setDoc(doc(firestore, "usuarios", user.uid), {
+        nome,
+        email,
+      });
 
-    // Aqui você pode fazer uma requisição ao servidor ou salvar os dados localmente
+      // Limpar os campos após o cadastro
+      setNome("");
+      setEmail("");
+      setSenha("");
 
-    // Limpar os campos após o cadastro
-    setTipoCadastro('');
-    setNome('');
-    setEmail('');
-    setSenha('');
+      // Redirecionar para a página de informações adicionais
+      navigate("/informacoes-adicionais");
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+    }
   };
 
   return (
-    
-    <div className="cadastro-container">
-      <h2>Cadastro</h2>
-      <form onSubmit={handleCadastro}>
-        <div className="form-group">
-          <label htmlFor="tipo">Escolha o tipo de cadastro:</label>
-          <select
-            id="tipo"
-            className="form-control"
-            onChange={handleTipoCadastro}
-            value={tipoCadastro}
-            required
-          >
-            <option value="">Selecione</option>
-            <option value="fornecedor">Fornecedor</option>
-            <option value="comprador">Comprador</option>
-            <option value="catador">Catador</option>
-          </select>
-        </div>
-
-        <div className="form-group">
+    <div className="cadastro-page">
+      <div className="cadastro-container">
+        <h2>Cadastro</h2>
+        <form onSubmit={handleCadastro}>
           <label htmlFor="nome">Nome:</label>
           <input
             type="text"
             id="nome"
-            className="form-control"
             value={nome}
             onChange={(event) => setNome(event.target.value)}
             required
           />
-        </div>
 
-        <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
-            className="form-control"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
           />
-        </div>
 
-        <div className="form-group">
           <label htmlFor="senha">Senha:</label>
           <input
             type="password"
             id="senha"
-            className="form-control"
             value={senha}
             onChange={(event) => setSenha(event.target.value)}
             required
           />
-        </div>
 
-        <button type="submit" className="btn btn-primary">
-          Cadastrar
-        </button>
-      </form>
+          <button type="submit">Cadastrar</button>
+        </form>
+      </div>
     </div>
   );
 };
