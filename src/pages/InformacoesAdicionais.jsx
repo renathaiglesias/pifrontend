@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { firestore } from "../firebaseConfig";
+import { firestore, auth } from "../firebaseConfig";
 import "../pages/InformacoesAdicionais.css";
 
 const InformacoesAdicionais = () => {
@@ -13,12 +13,25 @@ const InformacoesAdicionais = () => {
   const [tipoUsuario, setTipoUsuario] = useState("");
   const navigate = useNavigate(); // Obter a função navigate
 
+  useEffect(() => {
+    // Verificar se o usuário está autenticado
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        // Redirecionar para a página de login se o usuário não estiver autenticado
+        navigate("/login");
+      }
+    });
+
+    // Limpar o listener do useEffect quando o componente for desmontado
+    return () => unsubscribe();
+  }, [navigate]);
+
   const handleInformacoes = async (event) => {
     event.preventDefault();
 
     try {
       // Obter o ID do usuário atualmente autenticado
-      const userId = ""; // Obtenha o ID do usuário autenticado usando o Firebase Auth
+      const userId = auth.currentUser.uid;
 
       // Salvar as informações adicionais no Firestore
       await updateDoc(doc(firestore, "usuarios", userId), {
@@ -30,8 +43,15 @@ const InformacoesAdicionais = () => {
         tipoUsuario,
       });
 
-      // Redirecionar para outra página
-      navigate("/outra-pagina");
+      // Redirecionar para a página com base no tipo de usuário selecionado
+      if (tipoUsuario === "catador") {
+        navigate("/catador");
+      } else if (tipoUsuario === "fornecedor") {
+        navigate("/fornecedor");
+      } else if (tipoUsuario === "comprador") {
+        navigate("/comprador");
+      }
+
     } catch (error) {
       console.error("Erro ao salvar informações adicionais:", error);
     }
@@ -42,7 +62,9 @@ const InformacoesAdicionais = () => {
       <div className="informacoes-adicionais-container">
         <h2 className="informacoes-adicionais-title">Informações Adicionais</h2>
         <form className="informacoes-adicionais-form" onSubmit={handleInformacoes}>
-          <label className="informacoes-adicionais-label" htmlFor="cep">CEP:</label>
+          <label className="informacoes-adicionais-label" htmlFor="cep">
+            CEP:
+          </label>
           <input
             className="informacoes-adicionais-input"
             type="text"
@@ -52,7 +74,9 @@ const InformacoesAdicionais = () => {
             required
           />
 
-          <label className="informacoes-adicionais-label" htmlFor="endereco">Endereço:</label>
+          <label className="informacoes-adicionais-label" htmlFor="endereco">
+            Endereço:
+          </label>
           <input
             className="informacoes-adicionais-input"
             type="text"
@@ -62,7 +86,9 @@ const InformacoesAdicionais = () => {
             required
           />
 
-          <label className="informacoes-adicionais-label" htmlFor="cpf">CPF:</label>
+          <label className="informacoes-adicionais-label" htmlFor="cpf">
+            CPF:
+          </label>
           <input
             className="informacoes-adicionais-input"
             type="text"
@@ -72,7 +98,9 @@ const InformacoesAdicionais = () => {
             required
           />
 
-          <label className="informacoes-adicionais-label" htmlFor="rg">RG:</label>
+          <label className="informacoes-adicionais-label" htmlFor="rg">
+            RG:
+          </label>
           <input
             className="informacoes-adicionais-input"
             type="text"
@@ -82,7 +110,9 @@ const InformacoesAdicionais = () => {
             required
           />
 
-          <label className="informacoes-adicionais-label" htmlFor="genero">Gênero:</label>
+          <label className="informacoes-adicionais-label" htmlFor="genero">
+            Gênero:
+          </label>
           <select
             className="informacoes-adicionais-select"
             id="genero"
@@ -90,12 +120,20 @@ const InformacoesAdicionais = () => {
             onChange={(event) => setGenero(event.target.value)}
             required
           >
-            <option className="informacoes-adicionais-option" value="">Selecione</option>
-            <option className="informacoes-adicionais-option" value="homem">Homem</option>
-            <option className="informacoes-adicionais-option" value="mulher">Mulher</option>
+            <option className="informacoes-adicionais-option" value="">
+              Selecione
+            </option>
+            <option className="informacoes-adicionais-option" value="homem">
+              Homem
+            </option>
+            <option className="informacoes-adicionais-option" value="mulher">
+              Mulher
+            </option>
           </select>
 
-          <label className="informacoes-adicionais-label" htmlFor="tipoUsuario">Tipo de Usuário:</label>
+          <label className="informacoes-adicionais-label" htmlFor="tipoUsuario">
+            Tipo de Usuário:
+          </label>
           <select
             className="informacoes-adicionais-select"
             id="tipoUsuario"
@@ -103,13 +141,23 @@ const InformacoesAdicionais = () => {
             onChange={(event) => setTipoUsuario(event.target.value)}
             required
           >
-            <option className="informacoes-adicionais-option" value="">Selecione</option>
-            <option className="informacoes-adicionais-option" value="catador">Catador</option>
-            <option className="informacoes-adicionais-option" value="fornecedor">Fornecedor</option>
-            <option className="informacoes-adicionais-option" value="comprador">Comprador</option>
+            <option className="informacoes-adicionais-option" value="">
+              Selecione
+            </option>
+            <option className="informacoes-adicionais-option" value="catador">
+              Catador
+            </option>
+            <option className="informacoes-adicionais-option" value="fornecedor">
+              Fornecedor
+            </option>
+            <option className="informacoes-adicionais-option" value="comprador">
+              Comprador
+            </option>
           </select>
 
-          <button className="informacoes-adicionais-button" type="submit">Continuar</button>
+          <button className="informacoes-adicionais-button" type="submit">
+            Continuar
+          </button>
         </form>
       </div>
     </div>

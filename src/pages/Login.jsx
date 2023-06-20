@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { firebaseConfig } from "../firebaseConfig";
 import "../pages/Login.css";
 
 const auth = getAuth();
+setPersistence(auth, browserLocalPersistence);
 
 const Login = () => {
   const [email, setEmail] = useState("");
