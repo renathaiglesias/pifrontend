@@ -6,6 +6,7 @@ import image2 from '../images/image2.jpg';
 import image3 from '../images/image3.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
+import Informacao from '../pages/Informacao';
 
 
 const Home = () => {
@@ -53,7 +54,11 @@ const Home = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      
+      <br></br>
+      <div className="row">
+        
+        <Informacao />
+      </div>
     </div>
   );
 };

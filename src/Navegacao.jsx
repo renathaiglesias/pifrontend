@@ -39,7 +39,7 @@ function Navegacao() {
           <img
             src={logo}
             alt="ReciclApp Brasil Logo"
-            height="50"
+            height="65"
             className="d-inline-block align-top logo"
           />
         </Navbar.Brand>
