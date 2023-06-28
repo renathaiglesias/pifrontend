@@ -10,8 +10,11 @@
     color: #fff !important; /* Cor do texto dos links de navegação */
     margin-right: 10px; /* Margem direita entre os itens de navegação */
   }
+
   
-  
+  .icon {
+    font-size: 24px; /* Define o tamanho desejado */
+  }
   
   
   
