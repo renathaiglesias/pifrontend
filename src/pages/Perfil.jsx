@@ -27,7 +27,7 @@ const Perfil = () => {
   }, []);
 
   if (!userInfo) {
-    return <div>Loading...</div>;
+    return <div>Carregando dados...</div>;
   }
 
   return (
