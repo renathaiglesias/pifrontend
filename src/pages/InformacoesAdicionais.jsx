@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, doc, updateDoc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { firestore, auth } from "../firebaseConfig";
 import "../pages/InformacoesAdicionais.css";
@@ -43,6 +43,9 @@ const InformacoesAdicionais = () => {
         tipoUsuario,
       });
 
+      localStorage.setItem("userType", tipoUsuario);
+
+
       // Redirecionar para a página com base no tipo de usuário selecionado
       if (tipoUsuario === "catador") {
         navigate("/catador");
@@ -51,7 +54,6 @@ const InformacoesAdicionais = () => {
       } else if (tipoUsuario === "comprador") {
         navigate("/comprador");
       }
-
     } catch (error) {
       console.error("Erro ao salvar informações adicionais:", error);
     }

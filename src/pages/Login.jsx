@@ -1,26 +1,52 @@
-import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
+import React, { useState, useEffect } from "react";
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { firebaseConfig } from "../firebaseConfig";
 import "../pages/Login.css";
-
-const auth = getAuth();
-setPersistence(auth, browserLocalPersistence);
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const checkUserAuth = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        // Redirecionar para a página adequada se o usuário estiver autenticado
+        const userType = localStorage.getItem("userType");
+        if (userType === "catador") {
+          await navigate("/catador");
+        } else if (userType === "fornecedor") {
+          await navigate("/fornecedor");
+        } else if (userType === "comprador") {
+          await navigate("/comprador");
+        }
+      }
+    };
+
+    checkUserAuth();
+  }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      // Fazer a autenticação do usuário usando o Firebase Authentication
+      const auth = getAuth();
+      setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
 
-      // Redirecionar para outra página após o login bem-sucedido
-      navigate("/catador");
+      // Redirecionar para a página adequada após o login
+      const userType = localStorage.getItem("userType");
+      if (userType === "catador") {
+        navigate("/catador");
+      } else if (userType === "fornecedor") {
+        navigate("/fornecedor");
+      } else if (userType === "comprador") {
+        navigate("/comprador");
+      }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     }
@@ -59,10 +85,10 @@ const Login = () => {
             Login
           </button>
           <div className="login-links">
-          <a href="/esqueci" className="login-link">Esqueci minha senha</a>
-          <span className="login-link-separator">|</span>
-          <a href="/cadastro" className="login-link">Cadastre-se agora</a>
-        </div>
+            <a href="/esqueci" className="login-link">Esqueci minha senha</a>
+            <span className="login-link-separator">|</span>
+            <a href="/cadastro" className="login-link">Cadastre-se agora</a>
+          </div>
         </form>
       </div>
     </div>
