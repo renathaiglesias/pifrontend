@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { firebaseConfig } from "../firebaseConfig";
+import { firebaseConfig, firestore } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 import "../pages/Login.css";
 
 const Login = () => {
@@ -18,11 +19,11 @@ const Login = () => {
         // Redirecionar para a página adequada se o usuário estiver autenticado
         const userType = localStorage.getItem("userType");
         if (userType === "catador") {
-          await navigate("/catador");
+          navigate("/catador");
         } else if (userType === "fornecedor") {
-          await navigate("/fornecedor");
+          navigate("/fornecedor");
         } else if (userType === "comprador") {
-          await navigate("/comprador");
+          navigate("/comprador");
         }
       }
     };
@@ -38,14 +39,21 @@ const Login = () => {
       setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
 
-      // Redirecionar para a página adequada após o login
-      const userType = localStorage.getItem("userType");
-      if (userType === "catador") {
-        navigate("/catador");
-      } else if (userType === "fornecedor") {
-        navigate("/fornecedor");
-      } else if (userType === "comprador") {
-        navigate("/comprador");
+      const user = auth.currentUser;
+
+      if (user) {
+        // Obter o tipo de usuário a partir do Firestore
+        const userTypeDoc = await getDoc(doc(firestore, "usuarios", user.uid));
+        const userType = userTypeDoc.data().tipoUsuario;
+
+        // Redirecionar para a página adequada após o login
+        if (userType === "catador") {
+          navigate("/catador");
+        } else if (userType === "fornecedor") {
+          navigate("/fornecedor");
+        } else if (userType === "comprador") {
+          navigate("/comprador");
+        }
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -70,7 +78,7 @@ const Login = () => {
           />
 
           <label htmlFor="password" className="login-label">
-            Password:
+            Senha:
           </label>
           <input
             type="password"

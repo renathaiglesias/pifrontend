@@ -10,6 +10,7 @@ import Cadastro from './pages/Cadastro';
 import Footer from './Footer';
 import EsqueciMinhaSenha from './pages/EsqueciSenha';
 import InformacoesAdicionais from "./pages/InformacoesAdicionais";
+import Perfil from "./pages/Perfil"
 import './Style.css';
 import 'react-bootstrap-icons';
 
@@ -32,6 +33,7 @@ const App = () => {
             path="/informacoes-adicionais"
             element={<InformacoesAdicionais />}
           />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
         <Footer />
       </div>

@@ -29,6 +29,24 @@ const InformacoesAdicionais = () => {
   const handleInformacoes = async (event) => {
     event.preventDefault();
 
+    // Validar o CEP (8 dígitos)
+    if (cep.length !== 8) {
+      alert("O CEP deve ter 8 dígitos");
+      return;
+    }
+
+    // Validar o CPF (11 dígitos)
+    if (cpf.length !== 11) {
+      alert("O CPF deve ter 11 dígitos");
+      return;
+    }
+
+    // Validar o RG (7 dígitos)
+    if (rg.length !== 7) {
+      alert("O RG deve ter 7 dígitos");
+      return;
+    }
+
     try {
       // Obter o ID do usuário atualmente autenticado
       const userId = auth.currentUser.uid;
@@ -44,7 +62,6 @@ const InformacoesAdicionais = () => {
       });
 
       localStorage.setItem("userType", tipoUsuario);
-
 
       // Redirecionar para a página com base no tipo de usuário selecionado
       if (tipoUsuario === "catador") {
@@ -72,7 +89,8 @@ const InformacoesAdicionais = () => {
             type="text"
             id="cep"
             value={cep}
-            onChange={(event) => setCep(event.target.value)}
+            onChange={(event) => setCep(event.target.value.replace(/\D/g, "").slice(0, 8))}
+            maxLength={8}
             required
           />
 
@@ -96,7 +114,8 @@ const InformacoesAdicionais = () => {
             type="text"
             id="cpf"
             value={cpf}
-            onChange={(event) => setCpf(event.target.value)}
+            onChange={(event) => setCpf(event.target.value.replace(/\D/g, "").slice(0, 11))}
+            maxLength={11}
             required
           />
 
@@ -108,7 +127,8 @@ const InformacoesAdicionais = () => {
             type="text"
             id="rg"
             value={rg}
-            onChange={(event) => setRg(event.target.value)}
+            onChange={(event) => setRg(event.target.value.replace(/\D/g, "").slice(0, 7))}
+            maxLength={7}
             required
           />
 

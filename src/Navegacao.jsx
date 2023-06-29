@@ -34,24 +34,12 @@ function Navegacao() {
     }
   };
 
-  const getProfileUrl = async () => {
+  const getProfileUrl = () => {
     if (currentUser) {
-      try {
-        const userDocRef = firestore.collection('users').doc(currentUser.uid);
-        const userDocSnapshot = await userDocRef.get();
-
-        if (userDocSnapshot.exists()) {
-          const userData = userDocSnapshot.data();
-          if (userData && userData.profileUrl) {
-            return userData.profileUrl;
-          }
-        }
-      } catch (error) {
-        console.error('Erro ao obter informações do usuário:', error);
-      }
+      return '/perfil';
     }
 
-    return '/perfil';
+    return '/cadastro';
   };
 
   return (
@@ -73,15 +61,9 @@ function Navegacao() {
           <Nav.Link as={NavLink} to="/" className="nav-link">
             <FiImage className="icon" />
           </Nav.Link>
-          {isLoggedIn ? (
-            <Nav.Link as={NavLink} to={getProfileUrl()} className="nav-link">
-              <FiUser className="icon" />
-            </Nav.Link>
-          ) : (
-            <Nav.Link as={NavLink} to="/cadastro" className="nav-link">
-              <FiUser className="icon" />
-            </Nav.Link>
-          )}
+          <Nav.Link as={NavLink} to={getProfileUrl()} className="nav-link">
+            <FiUser className="icon" />
+          </Nav.Link>
         </Nav>
         <div className="ml-auto">
           {isLoggedIn ? (
