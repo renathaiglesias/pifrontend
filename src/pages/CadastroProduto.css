@@ -1,0 +1,75 @@
+/* InformacoesAdicionais.css */
+.informacoes-adicionais-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .informacoes-adicionais-container {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    width: 400px;
+    padding: 40px;
+  }
+  
+  .informacoes-adicionais-title {
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .informacoes-adicionais-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .informacoes-adicionais-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+  }
+  
+  .informacoes-adicionais-input {
+    width: 100%;
+    padding: 10px 0;
+    outline: none;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .informacoes-adicionais-select {
+    width: 100%;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .informacoes-adicionais-option {
+    background: transparent;
+    background-color: #275a53;
+    border: transparent;
+  }
+  
+  .informacoes-adicionais-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .informacoes-adicionais-button:hover {
+    background-color: #0056b3;
+  }
+  

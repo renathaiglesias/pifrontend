@@ -13,6 +13,8 @@ import InformacoesAdicionais from "./pages/InformacoesAdicionais";
 import Perfil from "./pages/Perfil"
 import './Style.css';
 import 'react-bootstrap-icons';
+import CadastroProduto from './pages/CadastroProduto';
+import Anuncios from './pages/Anuncios';
 
 
 const App = () => {
@@ -34,6 +36,8 @@ const App = () => {
             element={<InformacoesAdicionais />}
           />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/cadastroproduto" element={<CadastroProduto />} />
+          <Route path="/anuncios" element={<Anuncios />} />
         </Routes>
         <Footer />
       </div>

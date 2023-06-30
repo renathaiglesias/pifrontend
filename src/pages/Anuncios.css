@@ -1,0 +1,35 @@
+
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    width: 1150px;
+    margin-bottom: 20px;
+  }
+  
+  .card-img-top {
+    width: 75%; /* Define a largura da imagem como 100% */
+    height: auto; /* Define a altura da imagem como automática para manter a proporção */
+    object-fit: cover; /* Redimensiona a imagem para preencher o espaço disponível, mantendo a proporção */
+  }
+  
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    margin-bottom: 10px;
+  }
+  
+  .btn-primary {
+    width: 100%;
+  }
+  
