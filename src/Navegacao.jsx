@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { FiHome, FiUser, FiLogOut, FiLogIn, FiImage } from 'react-icons/fi';
+import { FiHome, FiUser, FiLogOut, FiLogIn } from 'react-icons/fi';
+import { FaRecycle } from 'react-icons/fa'
 import logo from './images/logo.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
 import './Navegacao.css';
 import { auth, firestore } from './firebaseConfig';
 
@@ -45,34 +44,32 @@ function Navegacao() {
   return (
     <Navbar className="custom-navbar navbar" expand="lg" variant="">
       <Container>
-        <Navbar.Brand as={NavLink} exact to="/">
-          <img
-            src={logo}
-            alt="ReciclApp Brasil Logo"
-            height="65"
-            className="d-inline-block align-top logo"
-          />
+        <Navbar.Brand as={NavLink} exact to="/" className="navbar-brand-centered">
+          <img src={logo} alt="ReciclApp Brasil Logo" height="120" className="d-inline-block align-top logo" />
         </Navbar.Brand>
 
-        <Nav className="justify-content-sm-center">
+        <Nav className="justify-content-start">
           <Nav.Link as={NavLink} to="/" className="nav-link">
             <FiHome className="icon" />
           </Nav.Link>
           <Nav.Link as={NavLink} to="/" className="nav-link">
-            <FiImage className="icon" />
-          </Nav.Link>
-          <Nav.Link as={NavLink} to={getProfileUrl()} className="nav-link">
-            <FiUser className="icon" />
+            <FaRecycle className="icon" />
           </Nav.Link>
         </Nav>
+
         <div className="ml-auto">
+          {!isLoggedIn && (
+            <Button as={NavLink} to={getProfileUrl()} variant="success" style={{ marginRight: '10px' }}>
+              <FiUser /> Cadastro
+            </Button>
+          )}
           {isLoggedIn ? (
             <Button variant="outline-primary" onClick={handleLogout}>
-              <FiLogOut /> Logout
+              <FiLogOut /> Sair
             </Button>
           ) : (
             <Button as={NavLink} to="/login" variant="outline-primary">
-              <FiLogIn /> Login
+              <FiLogIn /> Entrar
             </Button>
           )}
         </div>
