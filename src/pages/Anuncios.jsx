@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
-import { collection, getDocs, onSnapshot, orderBy, query, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, firestore, storage } from '../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import '../pages/Anuncios.css';
-import EditarAnuncio from './EditarAnuncio';
+import EditarAnuncio from '../components/EditarAnuncio';
 
 const Anuncios = () => {
   const [anuncios, setAnuncios] = useState([]);
@@ -44,8 +44,18 @@ const Anuncios = () => {
     setEditingAnuncio(null);
   };
 
-  const handleSaveEdit = () => {
-    setEditingAnuncio(null);
+  const handleSaveEdit = async (anuncioEditado) => {
+    try {
+      await updateDoc(doc(firestore, 'produtos', editingAnuncio.id), anuncioEditado);
+      setAnuncios(
+        anuncios.map((anuncio) =>
+          anuncio.id === editingAnuncio.id ? { ...anuncio, ...anuncioEditado } : anuncio
+        )
+      );
+      setEditingAnuncio(null);
+    } catch (error) {
+      console.error('Erro ao salvar as alterações:', error);
+    }
   };
 
   return (
@@ -60,7 +70,11 @@ const Anuncios = () => {
             <Col md={8}>
               <Card.Body>
                 {editingAnuncio === anuncio ? (
-                  <EditarAnuncio anuncio={anuncio} onCancel={handleCancelEdit} onSave={handleSaveEdit} />
+                  <EditarAnuncio
+                    anuncio={anuncio}
+                    onCancel={handleCancelEdit}
+                    onSave={handleSaveEdit}
+                  />
                 ) : (
                   <>
                     <Card.Title>{anuncio.titulo}</Card.Title>
