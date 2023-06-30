@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { FiHome, FiUser, FiLogOut, FiLogIn } from 'react-icons/fi';
-import { FaRecycle } from 'react-icons/fa'
+import { FaRecycle } from 'react-icons/fa';
 import logo from './images/logo.png';
 import './Navegacao.css';
 import { auth, firestore } from './firebaseConfig';
@@ -52,7 +52,7 @@ function Navegacao() {
           <Nav.Link as={NavLink} to="/" className="nav-link">
             <FiHome className="icon" />
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/" className="nav-link">
+          <Nav.Link as={NavLink} to="/anuncios" className="nav-link">
             <FaRecycle className="icon" />
           </Nav.Link>
         </Nav>
@@ -64,12 +64,17 @@ function Navegacao() {
             </Button>
           )}
           {isLoggedIn ? (
-            <Button variant="outline-primary" onClick={handleLogout}>
-              <FiLogOut /> Sair
+            <Button as={NavLink} to="/cadastroproduto" variant="success" style={{ marginRight: '10px' }}>
+              <FiUser /> Cadastro de Anúncios
             </Button>
           ) : (
             <Button as={NavLink} to="/login" variant="outline-primary">
               <FiLogIn /> Entrar
+            </Button>
+          )}
+          {isLoggedIn && (
+            <Button variant="outline-primary" onClick={handleLogout}>
+              <FiLogOut /> Sair
             </Button>
           )}
         </div>
