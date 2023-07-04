@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import { storage, firestore } from '../firebaseConfig';
+import { auth } from '../firebaseConfig';
+
 import './CadastroProduto.css'; // Importe o arquivo CSS renomeado
 
 const Categorias = ['Papel e papelão', 'Plástico', 'Vidro', 'Metal (alumínio, aço)'];
@@ -22,30 +24,36 @@ const CadastroProduto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       // Upload da imagem para o Firebase Storage
       const storageRef = ref(storage, `imagens/${imagem.name}`);
       await uploadBytes(storageRef, imagem);
-
+  
       // Obter a URL da imagem
       const imageUrl = await getDownloadURL(storageRef);
-
-      // Salvar o produto no Firestore
+  
+      // Obter o userId do usuário logado
+      const user = auth.currentUser;
+      const userId = user.uid;
+  
+      // Salvar o produto no Firestore com o userId associado
       const produtoData = {
+        userId, // Associar o userId do usuário ao produto
         imagem: imageUrl,
         titulo,
         descricao,
         categoria,
       };
       await addDoc(collection(firestore, 'produtos'), produtoData);
-
+  
       // Redirecionar para a página de sucesso
       navigate('/anuncios');
     } catch (error) {
       console.error('Erro ao cadastrar o produto:', error);
     }
   };
+  
 
   return (
     <Container className="informacoes-adicionais-container ">

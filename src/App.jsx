@@ -15,7 +15,7 @@ import './Style.css';
 import 'react-bootstrap-icons';
 import CadastroProduto from './pages/CadastroProduto';
 import Anuncios from './pages/Anuncios';
-import EditarAnuncio from './pages/EditarAnuncio';
+import MeusAnuncios from './pages/MeusAnuncios';
 
 
 const App = () => {
@@ -39,7 +39,7 @@ const App = () => {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/cadastroproduto" element={<CadastroProduto />} />
           <Route path="/anuncios" element={<Anuncios />} />
-          <Route path="/editaranuncio" element={<EditarAnuncio />} />
+          <Route path="/meusanuncios" element={<MeusAnuncios />} />
         </Routes>
         <Footer />
       </div>
