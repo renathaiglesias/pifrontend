@@ -11,6 +11,7 @@ const InformacoesAdicionais = () => {
   const [rg, setRg] = useState("");
   const [genero, setGenero] = useState("");
   const [tipoUsuario, setTipoUsuario] = useState("");
+  const [tipoUsuarioError, setTipoUsuarioError] = useState("");
   const navigate = useNavigate(); // Obter a função navigate
 
   useEffect(() => {
@@ -45,6 +46,14 @@ const InformacoesAdicionais = () => {
     if (rg.length !== 7) {
       alert("O RG deve ter 7 dígitos");
       return;
+    }
+
+    // Verificar se o tipo de usuário foi selecionado
+    if (!tipoUsuario) {
+      setTipoUsuarioError("Selecione o tipo de usuário");
+      return;
+    } else {
+      setTipoUsuarioError("");
     }
 
     try {
@@ -176,6 +185,8 @@ const InformacoesAdicionais = () => {
               Comprador
             </option>
           </select>
+
+          {tipoUsuarioError && <p className="informacoes-adicionais-error">{tipoUsuarioError}</p>}
 
           <button className="informacoes-adicionais-button" type="submit">
             Continuar

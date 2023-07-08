@@ -6,7 +6,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { storage, firestore } from '../firebaseConfig';
 import { auth } from '../firebaseConfig';
 
-import './CadastroProduto.css'; // Importe o arquivo CSS renomeado
+import './CadastroProduto.css';
 
 const Categorias = ['Papel e papelão', 'Plástico', 'Vidro', 'Metal (alumínio, aço)'];
 
@@ -24,19 +24,25 @@ const CadastroProduto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    // Verificar se todos os campos foram preenchidos
+    if (!imagem || !titulo || !descricao || !categoria) {
+      alert('Preencha todos os campos');
+      return;
+    }
+
     try {
       // Upload da imagem para o Firebase Storage
       const storageRef = ref(storage, `imagens/${imagem.name}`);
       await uploadBytes(storageRef, imagem);
-  
+
       // Obter a URL da imagem
       const imageUrl = await getDownloadURL(storageRef);
-  
+
       // Obter o userId do usuário logado
       const user = auth.currentUser;
       const userId = user.uid;
-  
+
       // Salvar o produto no Firestore com o userId associado
       const produtoData = {
         userId, // Associar o userId do usuário ao produto
@@ -46,14 +52,16 @@ const CadastroProduto = () => {
         categoria,
       };
       await addDoc(collection(firestore, 'produtos'), produtoData);
-  
+
+      // Exibir alerta de sucesso
+      alert('Anúncio cadastrado com sucesso');
+
       // Redirecionar para a página de sucesso
       navigate('/anuncios');
     } catch (error) {
       console.error('Erro ao cadastrar o produto:', error);
     }
   };
-  
 
   return (
     <Container className="informacoes-adicionais-container ">

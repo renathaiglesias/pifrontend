@@ -38,6 +38,15 @@ const Cadastro = () => {
       navigate("/informacoes-adicionais");
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
+
+      // Verificar o tipo de erro e exibir a mensagem adequada
+      if (error.code === "auth/email-already-in-use") {
+        alert("O e-mail já está cadastrado. Por favor, tente outro e-mail.");
+      } else if (error.code === "auth/invalid-email") {
+        alert("O e-mail informado não é válido. Por favor, verifique e tente novamente.");
+      } else {
+        alert("Erro ao cadastrar. Por favor, tente novamente.");
+      }
     }
   };
 

@@ -57,6 +57,15 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
+
+      // Verificar o tipo de erro e exibir a mensagem adequada
+      if (error.code === "auth/user-not-found" || error.code === "auth/invalid-email") {
+        alert("E-mail não cadastrado ou inválido. Por favor, verifique e tente novamente.");
+      } else if (error.code === "auth/wrong-password") {
+        alert("Senha incorreta. Por favor, verifique a senha e tente novamente.");
+      } else {
+        alert("Erro ao fazer login. Por favor, tente novamente.");
+      }
     }
   };
 

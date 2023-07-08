@@ -41,6 +41,18 @@ function Navegacao() {
     return '/cadastro';
   };
 
+  const renderMeusAnunciosButton = () => {
+    if (isLoggedIn) {
+      return (
+        <Button as={NavLink} to="/meusanuncios" variant="success" style={{ marginRight: '10px' }}>
+          Meus Anúncios
+        </Button>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Navbar className="custom-navbar navbar" expand="lg" variant="">
       <Container>
@@ -64,9 +76,12 @@ function Navegacao() {
             </Button>
           )}
           {isLoggedIn ? (
-            <Button as={NavLink} to="/cadastroproduto" variant="success" style={{ marginRight: '10px' }}>
-              <FiUser /> Cadastro de Anúncios
-            </Button>
+            <>
+              <Button as={NavLink} to="/cadastroproduto" variant="success" style={{ marginRight: '10px' }}>
+                <FiUser /> Cadastro de Anúncios
+              </Button>
+              {renderMeusAnunciosButton()}
+            </>
           ) : (
             <Button as={NavLink} to="/login" variant="outline-primary">
               <FiLogIn /> Entrar
